@@ -12,10 +12,14 @@ const sendHttpRequest = async (url, config) => {
   return resData;
 };
 
-export const useHttp = (url, config, initialValue) => {
+export const useHttp = (url, config, initialData) => {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(initialValue);
+  const [data, setData] = useState(initialData);
+
+  const clearData = () => {
+    setData(initialData);
+  };
 
   const sendRequest = useCallback(
     async function sendRequest(data) {
@@ -42,5 +46,6 @@ export const useHttp = (url, config, initialValue) => {
     isLoading,
     data,
     sendRequest,
+    clearData,
   };
 };
