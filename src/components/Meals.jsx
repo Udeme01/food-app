@@ -1,6 +1,7 @@
 import Error from "./Error";
 import MealItem from "./MealItem";
 import { useHttp } from "./hooks/useHttp";
+import { API_BASE_URL } from "../config";
 
 const requestConfig = {};
 
@@ -9,7 +10,7 @@ const Meals = () => {
     data: loadedMeals,
     isLoading,
     error,
-  } = useHttp("http://localhost:3000/meals", requestConfig, []);
+  } = useHttp(`${API_BASE_URL}/meals`, requestConfig, []);
 
   if (isLoading) {
     return <p className="center">Fetching meals...</p>;
