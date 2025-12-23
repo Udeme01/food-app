@@ -10,7 +10,14 @@ const Meals = () => {
     data: loadedMeals,
     isLoading,
     error,
-  } = useHttp(`${API_BASE_URL}/meals`, requestConfig, []);
+  } = useHttp(
+    (() => {
+      const base = (API_BASE_URL || "").replace(/\/$/, "");
+      return base.endsWith("/api") ? `${base}/meals` : `${base}/api/meals`;
+    })(),
+    requestConfig,
+    []
+  );
 
   if (isLoading) {
     return <p className="center">Fetching meals...</p>;
